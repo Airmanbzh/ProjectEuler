@@ -30,4 +30,26 @@ public class ProjectTest {
     public void testExOne(Integer n, Integer result) {
         assertEquals(result, Project.exOne(n));
     }
+
+    @DataProvider
+    public static Object[][] exTwoDataProvider() {
+        return new Object[][]{
+                {0, 0},
+                {1, 0},
+                {2, 2},
+                {3, 2},
+                {4, 2},
+                {5, 2},
+                {6, 2},
+                {7, 2},
+                {8, 10},
+                {4000000, 4613732},
+        };
+    }
+
+    @Test
+    @UseDataProvider("exTwoDataProvider")
+    public void testExTwo(Integer n, Integer result) {
+        assertEquals(result, Project.exTwo(n));
+    }
 }
