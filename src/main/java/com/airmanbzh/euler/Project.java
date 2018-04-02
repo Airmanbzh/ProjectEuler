@@ -220,4 +220,27 @@ public class Project {
 
         return (long)Math.pow(sum, 2) - squarredSum;
     }
+
+    /**
+     * By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+     *
+     * What is the 10 001st prime number?
+     *
+     * @param primeNumberIndex
+     * @return
+     */
+    public static Long ex7(Integer primeNumberIndex) {
+        Long lastNotPrime = 0L;
+        while (primes.size() <= primeNumberIndex - 1) {
+            Long lastNumber = Math.max(primes.size() > 0 ? primes.get(primes.size() - 1) : 0, lastNotPrime) + 1;
+
+            if (isPrime(lastNumber)) {
+                primes.add(lastNumber);
+            } else {
+                lastNotPrime = lastNumber;
+            }
+        }
+
+        return primes.size() > 0 ? primes.get(primes.size() - 1) : 0;
+    }
 }

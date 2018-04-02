@@ -137,4 +137,23 @@ public class ProjectTest {
     public void testEx6(Integer n, Long result) {
         assertEquals(result, Project.ex6(n));
     }
+
+    @DataProvider
+    public static Object[][] ex7DataProvider() {
+        return new Object[][]{
+                {1, 2L},
+                {2, 3L},
+                {3, 5L},
+                {4, 7L},
+                {5, 11L},
+                {6, 13L},
+                {10001, 104743L}
+        };
+    }
+
+    @Test
+    @UseDataProvider("ex7DataProvider")
+    public void testEx7(Integer n, Long result) {
+        assertEquals(result, Project.ex7(n));
+    }
 }
