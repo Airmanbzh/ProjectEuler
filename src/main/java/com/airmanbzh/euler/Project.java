@@ -1,12 +1,16 @@
 package com.airmanbzh.euler;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.sun.org.glassfish.gmbal.Description;
+
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Project {
 
     @Description("If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9." +
             "The sum of these multiples is 23. Find the sum of all the multiples of 3 or 5 below 1000")
-    public static Integer exOne(Integer n) {
+    public static Integer ex1(Integer n) {
         Integer sum = 0;
 
         if (n > 0) {
@@ -25,7 +29,7 @@ public class Project {
             "1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...\n" +
             "\n" +
             "By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.")
-    public static Integer exTwo(Integer max) {
+    public static Integer ex2(Integer max) {
         Integer sum = 0;
         Integer lastPrev = 0;
         Integer prev = 1;
@@ -46,5 +50,68 @@ public class Project {
         }
 
         return sum;
+    }
+
+
+    public static List<Long> primes = new ArrayList<Long>();
+    public static Long lastNotPrime = 1L;
+
+    @Description("The prime factors of 13195 are 5, 7, 13 and 29.\n" +
+            "\n" +
+            "What is the largest prime factor of the number 600851475143 ?")
+    public static Long ex3(Long number) {
+        List<Long> listResults = new ArrayList<Long>();
+        Integer lastIndex = 0;
+
+        if (number > 1) {
+            if (primes.contains(number)) {
+                return number;
+            }
+
+            while (!primes.contains(number) && number >= 2) {
+                Long lastNumber = Math.max(primes.size() > 0 ? primes.get(primes.size() - 1) : 0, lastNotPrime) + 1;
+
+                if (isPrime(lastNumber)) {
+                    primes.add(lastNumber);
+                } else {
+                    lastNotPrime = lastNumber;
+                }
+
+                for (Integer i = lastIndex; i < primes.size(); i++) {
+                    if (number % primes.get(i) == 0) {
+                        number = number / primes.get(i);
+
+                        listResults.add(primes.get(i));
+                    }
+                }
+            }
+
+            if (primes.contains(number)) {
+                listResults.add(number);
+            }
+        }
+
+        Long result = 0L;
+
+        if (listResults.size() > 0) {
+            result = Collections.max(listResults);
+        }
+
+        return result;
+    }
+
+    /**
+     * Test is number is divisible by one the known prime numbers
+     *
+     * @param number
+     * @return Boolean
+     */
+    private static Boolean isPrime(Long number) {
+        Integer i = 0;
+        while (i < primes.size() && number % primes.get(i) != 0) {
+            i++;
+        }
+
+        return i.equals(primes.size());
     }
 }
