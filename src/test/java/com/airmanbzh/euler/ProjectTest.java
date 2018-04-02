@@ -89,4 +89,52 @@ public class ProjectTest {
     public void testEx3(Long n, Long result) {
         assertEquals(result, Project.ex3(n));
     }
+
+    @DataProvider
+    public static Object[][] ex4DataProvider() {
+        return new Object[][]{
+                {0, 0L},
+                {1, 9L},
+                {2, 9009L},
+                {3, 906609L}
+        };
+    }
+
+    @Test
+    @UseDataProvider("ex4DataProvider")
+    public void testEx4(Integer n, Long result) {
+        assertEquals(result, Project.ex4(n));
+    }
+
+    @DataProvider
+    public static Object[][] ex5DataProvider() {
+        return new Object[][]{
+                {2, 2L},
+                {3, 6L},
+                {10, 2520L},
+                {20, 232792560L}
+        };
+    }
+
+    @Test
+    @UseDataProvider("ex5DataProvider")
+    public void testEx5(Integer n, Long result) {
+        assertEquals(result, Project.ex5(n));
+    }
+
+    @DataProvider
+    public static Object[][] ex6DataProvider() {
+        return new Object[][]{
+                {2, 4L},
+                {3, 22L},
+                {10, 2640L},
+                {100, 25164150L}
+        };
+    }
+
+    @Test
+    @UseDataProvider("ex6DataProvider")
+    public void testEx6(Integer n, Long result) {
+        assertEquals(result, Project.ex6(n));
+    }
 }
